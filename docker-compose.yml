@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  todo-service:
+    image: todo-service:latest
+    hostname: localhost
+    ports:
+      - "8080:8080"
+  
+  todo-app:
+    image: todo-app:latest
+    ports: 
+      - "3000:3000"
+
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    hostname: localhost
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tasks
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+networks:
+  default:
+    external:
+      name: todo-network
