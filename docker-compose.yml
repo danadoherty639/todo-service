@@ -7,11 +7,15 @@ services:
     ports:
       - "8080:8080"
   
+  todo-service-flask:
+    image: todo-service:latest
+    ports: 
+      - "5000:5000"
+
   todo-app:
     image: todo-app:latest
     ports: 
       - "3000:3000"
-
 
   postgres:
     image: postgres:alpine
